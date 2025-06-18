@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rozenzweig Architectes</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Apply custom fonts */
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #111111;
+        }
+    </style>
+</head>
+<body class="bg-black text-white h-screen overflow-hidden">
+
+    <!-- WhatsApp Icon -->
+    <a href="https://wa.me/YOURPHONENUMBER" target="_blank" class="fixed top-4 left-4 z-50">
+      <svg class="w-12 h-12" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>WhatsApp icon</title>
+        <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+    </a>
+
+    <div id="app" class="h-full lg:grid lg:grid-cols-5">
+
+        <!-- Right Column (Desktop Image) -->
+        <div class="hidden lg:block lg:col-span-2 h-full">
+             <img src="house_image.jpeg" 
+                  alt="Modern house interior with a view of a pool" 
+                  class="w-full h-full object-cover">
+        </div>
+
+        <!-- Left Column (Text Content) -->
+        <div class="lg:col-span-3 flex flex-col h-full" style="background-color: rgba(51,51,51,255);">
+            <div class="p-6 md:p-8 lg:p-12 flex flex-col flex-grow">
+
+                <!-- Logo -->
+                <div class="flex items-center justify-center mb-10 pt-8 lg:pt-0">
+                    <img src="logo.svg" alt="Rozenzweig Architectes Logo" class="w-32 lg:w-48">
+                </div>
+                
+                <!-- Content for Left Column -->
+                <div class="flex flex-col flex-grow">
+                    <!-- Title Section -->
+                    <div class="w-full">
+                        <div class="h-px bg-gray-300 opacity-50 -mx-6 md:-mx-8 lg:-mx-12"></div>
+                        <h1 class="text-3xl whitespace-nowrap md:text-7xl md:whitespace-normal font-light my-10 text-center tracking-widest">תכנון חכם מתחיל בניסיון</h1>
+                        <div class="h-px bg-gray-300 opacity-50 -mx-6 md:-mx-8 lg:-mx-12"></div>
+                    </div>
+
+                    <!-- Middle growing section for vertical centering -->
+                    <div class="flex-grow flex flex-col justify-center text-center py-4">
+                        <!-- Image for Mobile View -->
+                        <div class="lg:hidden my-8">
+                             <img src="house_image.jpeg" 
+                                 alt="Modern house interior with a view of a pool" 
+                                 class="w-full h-auto object-cover rounded-lg shadow-lg">
+                        </div>
+                        <!-- Subtitle -->
+                        <p class="text-2xl md:text-3xl text-gray-200 font-extralight tracking-widest">
+                            אם החלום כבר ברור לכם<br>זה הזמן להפוך אותו למציאות
+                        </p>
+                    </div>
+
+                    <!-- Contact Section at the bottom -->
+                    <div class="pt-8">
+                        <hr class="border-gray-600 w-full max-w-xl mx-auto mb-6">
+                        <p class="text-center text-lg text-gray-200 mb-6">יש לכם חזון? אנחנו נהפוך אותו לתכנון</p>
+                        <form id="contact-form" class="w-full max-w-xl mx-auto" action="https://formspree.io/f/mrbklryl" method="POST">
+                            <div class="flex flex-row items-start gap-6">
+                                <!-- Name Input -->
+                                <div class="flex-grow w-1/3">
+                                    <input type="text" id="name" name="name" class="bg-transparent border border-gray-400 text-white placeholder-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-right transition-colors" placeholder="שם" />
+                                    <p id="name-error" class="text-red-400 text-xs text-right mt-1 h-4"></p>
+                                </div>
+                                <!-- Phone Input -->
+                                <div class="flex-grow w-1/3">
+                                    <input type="tel" id="phone" name="phone" class="bg-transparent border border-gray-400 text-white placeholder-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-right transition-colors" placeholder="טלפון" />
+                                     <p id="phone-error" class="text-red-400 text-xs text-right mt-1 h-4"></p>
+                                </div>
+                                <!-- Submit Button -->
+                                <div class="flex-shrink-0">
+                                     <button id="submit-button" type="submit" class="text-white bg-transparent border border-white hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full px-8 py-2.5 text-center transition-colors">שלח</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
+        <div class="bg-gray-800 rounded-lg shadow-xl p-8 text-center max-w-sm mx-auto">
+            <p class="text-white text-lg mb-6">הפרטים נשלחו בהצלחה. ניצור איתכם קשר בהקדם</p>
+            <button id="close-modal-button" class="text-gray-800 bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-8 py-2.5">סגור</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get form and elements
+            const form = document.getElementById('contact-form');
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const submitButton = document.getElementById('submit-button');
+            
+            // Get error message elements
+            const nameError = document.getElementById('name-error');
+            const phoneError = document.getElementById('phone-error');
+
+            // Get modal elements
+            const successModal = document.getElementById('success-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+
+            // --- VALIDATION LOGIC ---
+            function validateName() {
+                if (nameInput.value.trim() === '') {
+                    nameInput.classList.add('border-red-500');
+                    nameError.textContent = 'שדה שם הוא שדה חובה.';
+                    return false;
+                }
+                return true;
+            }
+
+            function validatePhone() {
+                // Regex for Israeli phone numbers (allows 9-10 digits, optional hyphen)
+                const phoneRegex = /^0\d{1,2}-?\d{7}$/;
+                if (!phoneRegex.test(phoneInput.value)) {
+                    phoneInput.classList.add('border-red-500');
+                    phoneError.textContent = 'נא להזין מספר טלפון ישראלי חוקי.';
+                    return false;
+                }
+                return true;
+            }
+            
+            // --- RESET ERRORS ---
+            function clearErrors() {
+                nameInput.classList.remove('border-red-500');
+                nameError.textContent = '';
+                phoneInput.classList.remove('border-red-500');
+                phoneError.textContent = '';
+            }
+            
+            nameInput.addEventListener('input', clearErrors);
+            phoneInput.addEventListener('input', clearErrors);
+
+            // --- FORM SUBMISSION ---
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                clearErrors();
+
+                const isNameValid = validateName();
+                const isPhoneValid = validatePhone();
+
+                if (!isNameValid || !isPhoneValid) {
+                    return; // Stop if validation fails
+                }
+
+                // --- FETCH LOGIC ---
+                const formData = new FormData(form);
+                submitButton.disabled = true;
+                submitButton.textContent = 'שולח...';
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        // Success
+                        form.reset();
+                        successModal.classList.remove('hidden');
+                    } else {
+                        // Handle server errors
+                        response.json().then(data => {
+                            if (Object.hasOwn(data, 'errors')) {
+                                alert(data["errors"].map(error => error["message"]).join(", "));
+                            } else {
+                                alert('אירעה שגיאה. אנא נסה שוב.');
+                            }
+                        })
+                    }
+                }).catch(error => {
+                    // Handle network errors
+                    alert('אירעה שגיאת רשת. אנא בדוק את החיבור ונסה שוב.');
+                }).finally(() => {
+                    // Reset button state
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'שלח';
+                });
+            });
+            
+            // --- MODAL LOGIC ---
+            closeModalButton.addEventListener('click', function() {
+                successModal.classList.add('hidden');
+            });
+
+            // Close modal if clicking outside of it
+             successModal.addEventListener('click', function(e) {
+                if (e.target === successModal) {
+                     successModal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
