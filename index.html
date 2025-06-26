@@ -62,7 +62,7 @@
       }
     </style>
   </head>
-  <body class="bg-black text-white h-screen overflow-hidden">
+  <body class="bg-black text-white min-h-screen lg:h-screen lg:overflow-hidden">
     <div id="app" class="h-full lg:grid lg:grid-cols-5">
       <aside class="hidden lg:block lg:col-span-2 h-full">
         <video
@@ -105,11 +105,17 @@
                 </h1>
 
                 <div class="lg:hidden mt-6 mb-8">
-                  <img
-                    src="house_image.jpeg"
-                    alt="Modern house interior with a view of a pool"
-                    class="w-full h-auto object-cover rounded-lg shadow-lg"
-                  />
+                  <video
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    class="w-full h-full object-cover"
+                    title="Architectural design montage"
+                  >
+                    <source src="moving_background.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
                 <div
                   class="text-2xl md:text-xl text-gray-200 font-extralight tracking-widest"
@@ -148,57 +154,64 @@
               action="https://formspree.io/f/mrbklryl"
               method="POST"
             >
-              <div class="flex flex-col gap-6">
-                <div class="flex flex-row items-start gap-6">
-                  <div class="flex-grow w-1/3">
-                    <label for="name" class="sr-only">שם</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      class="bg-transparent border border-gray-400 text-white placeholder-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-right transition-colors"
-                      placeholder="שם"
-                      required
-                      aria-describedby="name-error"
-                    />
-                    <p
-                      id="name-error"
-                      class="text-red-400 text-xs text-right mt-1 h-4"
-                      aria-live="polite"
-                    ></p>
-                  </div>
-                  <div class="flex-grow w-1/3">
-                    <label for="phone" class="sr-only">טלפון</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      class="bg-transparent border border-gray-400 text-white placeholder-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-right transition-colors"
-                      placeholder="טלפון"
-                      required
-                      aria-describedby="phone-error"
-                    />
-                    <p
-                      id="phone-error"
-                      class="text-red-400 text-xs text-right mt-1 h-4"
-                      aria-live="polite"
-                    ></p>
-                  </div>
-                  <div class="flex-shrink-0">
-                    <button
-                      id="submit-button"
-                      type="submit"
-                      class="text-white bg-transparent border border-white hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full px-8 py-2.5 text-center transition-colors"
-                    >
-                      שלח
-                    </button>
-                  </div>
+              <div
+                class="flex flex-col sm:flex-row sm:flex-wrap sm:items-start gap-6"
+              >
+                <div class="w-full sm:w-1/3 sm:order-1">
+                  <label for="name" class="sr-only">שם</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="bg-transparent border border-gray-400 text-white placeholder-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-right transition-colors"
+                    placeholder="שם"
+                    required
+                    aria-describedby="name-error"
+                  />
+                  <p
+                    id="name-error"
+                    class="text-red-400 text-xs text-right mt-1 h-4"
+                    aria-live="polite"
+                  ></p>
+                </div>
+                <div class="w-full sm:w-1/3 sm:order-2">
+                  <label for="phone" class="sr-only">טלפון</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="bg-transparent border border-gray-400 text-white placeholder-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-right transition-colors"
+                    placeholder="טלפון"
+                    required
+                    aria-describedby="phone-error"
+                  />
+                  <p
+                    id="phone-error"
+                    class="text-red-400 text-xs text-right mt-1 h-4"
+                    aria-live="polite"
+                  ></p>
                 </div>
 
-                <fieldset>
+                <fieldset class="w-full order-3 sm:order-4">
                   <legend class="sr-only">סיבת הפנייה</legend>
+                  <div class="sm:hidden">
+                    <label for="inquiry_type_mobile" class="sr-only"
+                      >סיבת הפנייה</label
+                    >
+                    <select
+                      id="inquiry_type_mobile"
+                      name="inquiry_type"
+                      class="bg-transparent border border-gray-400 text-white placeholder-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-right transition-colors"
+                    >
+                      <option value="כללי">כללי</option>
+                      <option value="בית פרטי">בית פרטי</option>
+                      <option value="בניה רוויה">בניה רוויה</option>
+                      <option value="ממ״ד">ממ״ד</option>
+                      <option value="תב״ע">תב״ע</option>
+                    </select>
+                  </div>
                   <div
-                    class="flex flex-wrap justify-center items-center gap-x-[2.2rem] gap-y-2 relative left-[3.9rem] bottom-[1.5rem]"
+                    class="hidden sm:flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-[2.2rem] gap-y-2 relative sm:left-[3.9rem] left-0 mt-[-1rem]"
                   >
                     <div class="flex items-center">
                       <input
@@ -273,6 +286,18 @@
                     </div>
                   </div>
                 </fieldset>
+
+                <div
+                  class="w-full sm:flex-shrink-0 sm:w-auto order-4 sm:order-3"
+                >
+                  <button
+                    id="submit-button"
+                    type="submit"
+                    class="text-white bg-transparent border border-white hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full px-8 py-2.5 text-center transition-colors"
+                  >
+                    שלח
+                  </button>
+                </div>
               </div>
             </form>
           </section>
@@ -328,6 +353,10 @@
         const nameInput = document.getElementById("name");
         const phoneInput = document.getElementById("phone");
         const submitButton = document.getElementById("submit-button");
+        const radioInquiry = document.querySelectorAll(
+          'input[name="inquiry_type"]'
+        );
+        const selectInquiry = document.getElementById("inquiry_type_mobile");
 
         // Get error message elements
         const nameError = document.getElementById("name-error");
@@ -357,6 +386,26 @@
             }, 500);
           }, 500);
         }, 3000); // Change text every 3 seconds
+
+        // --- SYNC RADIO AND SELECT ---
+        // Sync select to radio
+        selectInquiry.addEventListener("change", (e) => {
+          const selectedRadio = document.querySelector(
+            `input[name="inquiry_type"][value="${e.target.value}"]`
+          );
+          if (selectedRadio) {
+            selectedRadio.checked = true;
+          }
+        });
+
+        // Sync radio to select
+        radioInquiry.forEach((radio) => {
+          radio.addEventListener("change", (e) => {
+            if (e.target.checked) {
+              selectInquiry.value = e.target.value;
+            }
+          });
+        });
 
         // --- VALIDATION LOGIC ---
         function validateName() {
