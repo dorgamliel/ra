@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rozenzweig Architectes</title>
+    <title>Rozenzweig Architects</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -65,6 +65,60 @@
       .video-item {
         transition: opacity 0.3s ease-in-out;
       }
+
+      body {
+        font-family: "Heebo", sans-serif;
+        background-color: #111111;
+      }
+
+      @keyframes slide-out-down {
+        to {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes slide-in-down {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .slide-out {
+        animation: slide-out-down 0.5s forwards ease-in-out;
+      }
+
+      .slide-in {
+        animation: slide-in-down 0.5s forwards ease-in-out;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      .video-item {
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      /* Fade-in effect for container when videos are ready */
+      #desktop-video-container,
+      #mobile-video-container {
+        transition: opacity 0.4s ease-in-out;
+        opacity: 0;
+      }
     </style>
   </head>
   <body class="bg-black text-white min-h-screen lg:h-screen lg:overflow-hidden">
@@ -104,7 +158,7 @@
           <header class="p-6 md:p-0 flex items-center justify-center">
             <img
               src="logo.svg"
-              alt="Rozenzweig Architectes Logo"
+              alt="Rozenzweig Architects Logo"
               class="w-16 lg:w-40"
             />
           </header>
@@ -634,6 +688,71 @@
             closeModalButton.click();
           }
         });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // --- VIDEO PRELOAD AND SWITCH ---
+        function preloadAndPlay(containerId) {
+          const container = document.getElementById(containerId);
+          if (!container) return;
+
+          const videos = Array.from(container.querySelectorAll("video"));
+          if (videos.length < 2) return;
+
+          let loaded = 0;
+
+          videos.forEach((video) => {
+            video.preload = "auto";
+            video.load();
+
+            const onReady = () => {
+              video.removeEventListener("canplaythrough", onReady);
+              loaded++;
+              if (loaded === videos.length) {
+                container.style.opacity = "1";
+                startSwitcher(videos);
+              }
+            };
+
+            video.addEventListener("canplaythrough", onReady);
+          });
+        }
+
+        function startSwitcher(videos) {
+          let current = 0;
+
+          const switchToNext = () => {
+            const currentVideo = videos[current];
+            const next = (current + 1) % videos.length;
+            const nextVideo = videos[next];
+
+            const checkTime = () => {
+              if (
+                !isNaN(currentVideo.duration) &&
+                currentVideo.duration - currentVideo.currentTime <= 0.5
+              ) {
+                currentVideo.removeEventListener("timeupdate", checkTime);
+                currentVideo.classList.add("opacity-0");
+                nextVideo.classList.remove("opacity-0");
+                nextVideo.play();
+                current = next;
+                switchToNext();
+              }
+            };
+
+            currentVideo.addEventListener("timeupdate", checkTime);
+          };
+
+          videos[0].play();
+          switchToNext();
+        }
+
+        preloadAndPlay("desktop-video-container");
+        preloadAndPlay("mobile-video-container");
+
+        // [Your full JavaScript logic from your previous version follows here...]
+        // No changes made to form validation, text animation, modal handling, etc.
+        // You can safely keep that code exactly as-is.
       });
     </script>
   </body>
