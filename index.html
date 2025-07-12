@@ -60,20 +60,45 @@
         white-space: nowrap;
         border-width: 0;
       }
+
+      /* Video transition styles */
+      .video-item {
+        transition: opacity 0.3s ease-in-out;
+      }
     </style>
   </head>
   <body class="bg-black text-white min-h-screen lg:h-screen lg:overflow-hidden">
     <div id="app" class="h-full lg:grid lg:grid-cols-5">
-      <aside class="hidden lg:block lg:col-span-2 h-full">
+      <aside
+        id="desktop-video-container"
+        class="hidden lg:block lg:col-span-2 h-full relative"
+      >
         <video
           autoplay
           muted
-          loop
           playsinline
-          class="w-full h-full object-cover"
+          class="video-item absolute inset-0 w-full h-full object-cover"
           title="Architectural design montage"
         >
           <source src="moving_background.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <video
+          muted
+          playsinline
+          class="video-item absolute inset-0 w-full h-full object-cover opacity-0"
+          title="Architectural design montage"
+        >
+          <source src="moving_background2.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <video
+          muted
+          playsinline
+          class="video-item absolute inset-0 w-full h-full object-cover opacity-0"
+          title="Architectural design montage"
+        >
+          <source src="moving_background3.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </aside>
@@ -104,16 +129,36 @@
                   תכנון חכם מתחיל בניסיון
                 </h1>
 
-                <div class="lg:hidden mt-6 mb-8">
+                <div
+                  id="mobile-video-container"
+                  class="lg:hidden mt-6 mb-8 relative h-64"
+                >
                   <video
                     autoplay
                     muted
-                    loop
                     playsinline
-                    class="w-full h-full object-cover"
+                    class="video-item absolute inset-0 w-full h-full object-cover"
                     title="Architectural design montage"
                   >
                     <source src="moving_background.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <video
+                    muted
+                    playsinline
+                    class="video-item absolute inset-0 w-full h-full object-cover opacity-0"
+                    title="Architectural design montage"
+                  >
+                    <source src="moving_background2.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <video
+                    muted
+                    playsinline
+                    class="video-item absolute inset-0 w-full h-full object-cover opacity-0"
+                    title="Architectural design montage"
+                  >
+                    <source src="moving_background3.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>
@@ -349,6 +394,61 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // --- VIDEO SWITCHER LOGIC (UPDATED) ---
+        function initializeVideoSwitcher(containerId) {
+          const container = document.getElementById(containerId);
+          if (!container) return;
+
+          const videos = container.querySelectorAll(".video-item");
+          if (videos.length < 2) return; // Need at least two videos to switch
+
+          let currentVideoIndex = 0;
+
+          // Function to set up the listener for the currently active video
+          const scheduleNextVideo = () => {
+            const currentVideo = videos[currentVideoIndex];
+
+            // Define the event handler for time updates
+            const timeUpdateHandler = () => {
+              // Check if the video is loaded and we're within 0.5s of the end
+              if (
+                !isNaN(currentVideo.duration) &&
+                currentVideo.duration - currentVideo.currentTime <= 0.5
+              ) {
+                // Remove this listener to prevent it from firing multiple times
+                currentVideo.removeEventListener(
+                  "timeupdate",
+                  timeUpdateHandler
+                );
+
+                // Fade out the current video
+                currentVideo.classList.add("opacity-0");
+
+                // Determine the next video index
+                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                const nextVideo = videos[currentVideoIndex];
+
+                // Fade in the next video and play it
+                nextVideo.classList.remove("opacity-0");
+                nextVideo.play();
+
+                // Set up the listener for the new video
+                scheduleNextVideo();
+              }
+            };
+
+            // Add the event listener to the current video
+            currentVideo.addEventListener("timeupdate", timeUpdateHandler);
+          };
+
+          // Start the cycle with the first video
+          scheduleNextVideo();
+        }
+
+        // Initialize for both desktop and mobile video containers
+        initializeVideoSwitcher("desktop-video-container");
+        initializeVideoSwitcher("mobile-video-container");
+
         // Get form and elements
         const form = document.getElementById("contact-form");
         const nameInput = document.getElementById("name");
