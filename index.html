@@ -113,23 +113,21 @@
         transition: opacity 0.3s ease-in-out;
       }
 
-      /* Gallery button: gentle pulse (grow only) on hover */
-      @keyframes gentle-pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.04); }
+      /* Gallery button: grows gently on hover, eases back when the pointer leaves */
+      .gallery-btn {
+        transition: transform 0.35s ease-out;
       }
       .gallery-btn:hover,
       .gallery-btn:focus-visible {
-        animation: gentle-pulse 1.8s ease-in-out infinite;
+        transform: scale(1.06);
       }
       @media (prefers-reduced-motion: reduce) {
-        .gallery-btn:hover,
-        .gallery-btn:focus-visible {
-          animation: none;
+        .gallery-btn {
+          transition: none;
         }
       }
 
-      /* Photo credit on gallery tiles; hidden until the photographer is known */
+      /* Photo credit on gallery tiles and the opened photo */
       .photo-credit {
         display: none;
       }
@@ -464,7 +462,10 @@
         <button id="lb-close" class="absolute top-4 left-4 text-white text-2xl hover:opacity-70 z-10">✕</button>
         <button id="lb-prev" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl hover:opacity-70 z-10 bg-black bg-opacity-40 px-3 py-2 rounded">‹</button>
         <button id="lb-next" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl hover:opacity-70 z-10 bg-black bg-opacity-40 px-3 py-2 rounded">›</button>
-        <img id="lb-img" src="" alt="" class="max-h-screen max-w-full object-contain p-12" />
+        <div class="relative">
+          <img id="lb-img" src="" alt="" class="block max-h-[calc(100vh-6rem)] max-w-[calc(100vw-6rem)] object-contain" />
+          <span id="lb-credit" class="photo-credit absolute bottom-3 right-3 text-white text-xs sm:text-sm font-light tracking-wide text-right whitespace-pre-line leading-snug pointer-events-none" style="text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8)"></span>
+        </div>
       </div>
 
       <!-- Grid -->
@@ -796,7 +797,8 @@
           galleryGrid.appendChild(div);
         });
         galleryCounter.textContent = galleryImages.length + " תמונות";
-        if (SHOW_PHOTO_CREDITS) galleryGrid.classList.add("show-photo-credits");
+        document.getElementById("lb-credit").textContent = PHOTO_CREDIT;
+        if (SHOW_PHOTO_CREDITS) galleryOverlay.classList.add("show-photo-credits");
 
         function openGallery() {
           galleryOverlay.classList.remove("hidden");
