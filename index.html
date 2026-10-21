@@ -762,8 +762,8 @@
 
         // Photo credit shown on each gallery tile. Set SHOW_PHOTO_CREDITS to true
         // once the photographer's name is filled in.
-        const PHOTO_CREDIT = "צילום: צילום";
-        const SHOW_PHOTO_CREDITS = false;
+        const PHOTO_CREDIT = "עיצוב פנים: ענבל ברקוביץ\nצילום: מיכאל תקוה";
+        const SHOW_PHOTO_CREDITS = true;
 
         const galleryOverlay = document.getElementById("gallery-overlay");
         const galleryGrid = document.getElementById("gallery-grid");
@@ -789,7 +789,7 @@
           img.addEventListener("click", () => openLightbox(i));
           div.appendChild(img);
           const credit = document.createElement("span");
-          credit.className = "photo-credit absolute bottom-2 right-2 text-white text-xs font-light tracking-wide pointer-events-none";
+          credit.className = "photo-credit absolute bottom-1.5 right-2 sm:bottom-2 text-white text-[10px] sm:text-xs font-light tracking-wide text-right whitespace-pre-line leading-snug pointer-events-none";
           credit.style.textShadow = "0 1px 3px rgba(0, 0, 0, 0.8)";
           credit.textContent = PHOTO_CREDIT;
           div.appendChild(credit);
