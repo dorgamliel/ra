@@ -113,6 +113,30 @@
         transition: opacity 0.3s ease-in-out;
       }
 
+      /* Gallery button: gentle pulse (grow only) on hover */
+      @keyframes gentle-pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.04); }
+      }
+      .gallery-btn:hover,
+      .gallery-btn:focus-visible {
+        animation: gentle-pulse 1.8s ease-in-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .gallery-btn:hover,
+        .gallery-btn:focus-visible {
+          animation: none;
+        }
+      }
+
+      /* Photo credit on gallery tiles; hidden until the photographer is known */
+      .photo-credit {
+        display: none;
+      }
+      .show-photo-credits .photo-credit {
+        display: block;
+      }
+
       /* Fade-in effect for container when videos are ready */
       #desktop-video-container,
       #mobile-video-container {
@@ -221,6 +245,17 @@
               </div>
 
               <div class="h-px bg-gray-300 opacity-50 md:-mx-8 lg:-mx-12"></div>
+            </div>
+
+            <!-- Gallery Button -->
+            <div class="flex justify-center pt-4">
+              <button
+                id="gallery-btn"
+                class="gallery-btn bg-white text-[#333333] text-sm tracking-widest font-normal rounded-lg px-14 py-2"
+                aria-label="פתח גלריה"
+              >
+                גלריה
+              </button>
             </div>
           </section>
 
@@ -389,15 +424,6 @@
             </form>
           </section>
         </div>
-        <!-- Gallery Button -->
-        <button
-          id="gallery-btn"
-          class="absolute top-8 right-8 z-10 text-white text-sm tracking-widest font-light hover:opacity-70 transition-opacity"
-          aria-label="פתח גלריה"
-        >
-          גלריה
-        </button>
-
         <a
           href="https://wa.me/972553178300"
           target="_blank"
@@ -734,6 +760,11 @@
           "gallery/photo_6.jpg",
         ];
 
+        // Photo credit shown on each gallery tile. Set SHOW_PHOTO_CREDITS to true
+        // once the photographer's name is filled in.
+        const PHOTO_CREDIT = "צילום: צילום";
+        const SHOW_PHOTO_CREDITS = false;
+
         const galleryOverlay = document.getElementById("gallery-overlay");
         const galleryGrid = document.getElementById("gallery-grid");
         const galleryCounter = document.getElementById("gallery-counter");
@@ -749,7 +780,7 @@
         // Build gallery grid once
         galleryImages.forEach((src, i) => {
           const div = document.createElement("div");
-          div.className = "aspect-square overflow-hidden cursor-pointer bg-gray-900";
+          div.className = "relative aspect-square overflow-hidden cursor-pointer bg-gray-900";
           const img = document.createElement("img");
           img.src = src;
           img.alt = "פרויקט " + (i + 1);
@@ -757,9 +788,15 @@
           img.loading = "lazy";
           img.addEventListener("click", () => openLightbox(i));
           div.appendChild(img);
+          const credit = document.createElement("span");
+          credit.className = "photo-credit absolute bottom-2 right-2 text-white text-xs font-light tracking-wide pointer-events-none";
+          credit.style.textShadow = "0 1px 3px rgba(0, 0, 0, 0.8)";
+          credit.textContent = PHOTO_CREDIT;
+          div.appendChild(credit);
           galleryGrid.appendChild(div);
         });
         galleryCounter.textContent = galleryImages.length + " תמונות";
+        if (SHOW_PHOTO_CREDITS) galleryGrid.classList.add("show-photo-credits");
 
         function openGallery() {
           galleryOverlay.classList.remove("hidden");
